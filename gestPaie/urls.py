@@ -23,4 +23,6 @@ urlpatterns = [
     #path('',index,name="index"),
     path('frais/',ffrais,name="ffrais"),
     path('',dash,name="dash"),
+    
+    path('deleteFrais/<str:id>/',deleteFrais, name="deleteFrais"),
 ]
