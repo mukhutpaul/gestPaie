@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app_gestPaie.views import *
+from app_gestPaie.views import paiement
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('',index,name="index"),
     path('frais/',ffrais,name="ffrais"),
     path('',dash,name="dash"),
+    path('paiement/',ppaiement,name="ppaiement"),
 ]
