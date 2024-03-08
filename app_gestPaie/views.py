@@ -1,5 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from app_gestPaie.models.paiement import paiment
+from app_gestPaie.models.frais import Frais
 
 # Create your views here.
 
@@ -8,12 +9,12 @@ def index(request):
     return render(request,'index.html')
 
 def ffrais(request):
-    paiement = paiment.objects.all()
-     #paiement = paiment.objects.all().count()
-
+    frais = Frais.objects.all()
+    #frais = Frais.objects.all().count()
+    
     ctx = {
-        "paiement": paiement
-        "nbrp": len(paiement)
+        "frais": frais,
+        "nbrf": len(frais)
     }
     return render(request,'frais.html',ctx)
 
@@ -21,6 +22,9 @@ def dash(request):
     
     return render(request,'dashboard.html')
 
-def ppaiement(request):
-    
-    return render(request,'paiement.html')
+
+def deleteFrais(request,id):
+        fr = Frais.objects.get(pk=id)
+        fr.delete()
+        return HttpResponseRedirect('/frais/')
+ 
