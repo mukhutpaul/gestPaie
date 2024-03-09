@@ -25,4 +25,6 @@ urlpatterns = [
     path('',dash,name="dash"),
     
     path('deleteFrais/<str:id>/',deleteFrais, name="deleteFrais"),
+    path('paiement/',ppaiement,name="ppaiement"),
+    path('deletepaiement/<str:id>/',deletepaiement, name="deletepaiement"),
 ]

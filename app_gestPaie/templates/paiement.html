@@ -57,7 +57,11 @@
                                         <td>{{pm.eleve}}</td>
                                         <td>{{pm.datepaie}}</td>
                                         <td>{{pm.montant}}</td>
-                                        <td>m s</td>
+                                        <td>
+
+                                            <a href="{% url 'deletepaiement' pm.codeFrais %}" onclick="return confirm(Etes-vous sur de vouloir supprimer?)">S</a>
+
+                                        </td>
                                         
                                         
                                     </tr>
@@ -84,7 +88,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>Nombre total</th>
-                                        <th>{{nbrp"}}</th>
+                                        <th>{{nbrp}}</th>
                                        
                                         
                                     </tr>
