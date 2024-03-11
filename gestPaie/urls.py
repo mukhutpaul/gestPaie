@@ -26,5 +26,10 @@ urlpatterns = [
     
     path('deleteFrais/<str:id>/',deleteFrais, name="deleteFrais"),
     path('paiement/',ppaiement,name="ppaiement"),
+    
+    path('ajouterFrais/',ajouterFrais,name="ajouterFrais"),
+    path('addfrais/',addfrais,name="addfrais"),
+   
+   
     path('deletepaiement/<str:id>/',deletepaiement, name="deletepaiement"),
 ]
