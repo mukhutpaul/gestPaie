@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+  <p style="text-align: right;font-size: 13px ">Kinshasa, le {{date}}</p>
+  <table class="styled-table" >
+    <thead>
+      
+       <tr >
+           <th style="text-align: left; padding-top: 5px;width:20%"><strong><img src="app_controle/static/flag.png" alt="Ministere de defense" style="width:90px;height:90px;border-radius:123px;objectif-fit:cover;margin-right:0px"/></strong></th>
+           <th style="text-align: center; padding-top: 5px;width:60%"><p style="font-size: 16px;margin-left:10px;visibility:hidden">  REPUBLIQUE DEMOCRATIQUE DU CONGO <br><i style="font-size: 12px">CENTRE MK LA GRACE </i>          </p></th>
+           <th style="text-align: right; padding-top: 5px;width:20%"><strong><img src="app_controle/static/rdc1.png" alt="Ministere de defense" style="width:90px;height:90px;border-radius:123px;objectif-fit:cover;margin-right:0px"/></strong></th>
+           
+       </tr>
+       </thead>
+     </table>
+<hr>
+<div style="text-align: center;">
+<h2>Liste des frais<br>
+</h2>
+
+</div>
+
+<hr>
+{% if fr %} 
+
+    
+<table class="table" border="1px">
+    <tr style="padding-top: 5px;font-size: small;">
+      <td style="text-align: center; padding-top: 5px;"><strong>N°</strong></td>
+      <td style="text-align: center; padding-top: 5px;"><strong>CODE FRAIS</strong></td>
+      <td style="text-align: center;padding-top: 5px;"><strong>LIBELLE</strong></td>
+
+      <!-- <td style="text-align: center;padding-top: 5px;"><strong>UNITE</strong></td> -->
+    </tr>
+    {% for f in fr %}
+    <tr style="padding-top: 5px;font-size: small;">
+        <td style="text-align: center;">{{ forloop.counter }}</td>
+        <td style="text-align: center;">{{ f.codeFrais }}</td>
+        <td style="text-align: center;">{{ f.libelle}}</td>
+
+   
+       <!-- <td style="text-align: center;">
+        {{ r.unite }}
+     </td> -->
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+{% endif %}
+
+
+</h6>
+ 
+</body>
+</html>

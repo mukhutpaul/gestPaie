@@ -5,6 +5,7 @@ from app_gestPaie.models.paiement import paiment
 from django.shortcuts import redirect
 from datetime import datetime
 from xhtml2pdf import pisa
+from django.template.loader import get_template
 
 # Create your views here.
 
