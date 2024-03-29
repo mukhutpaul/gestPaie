@@ -46,6 +46,8 @@
                                         <td>{{fr.libelle}}</td>
                                         <td>
                                             <a href="{% url 'deleteFrais' fr.codeFrais %}"  onclick="return confirm('Etes-vous sûr de vouloir supprimer?')">S</a>
+
+                                            <a href="{% url 'modifierFrais' fr.codeFrais %}">m</a>
                                          
                                         </td>
                                     </tr>

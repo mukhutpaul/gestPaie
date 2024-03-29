@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <div class="container-fluid  dashboard-content">
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+     
+        <div class="card">
+            <h5 class="card-header">FORMULAIRE D'AJOUT FRAIS</h5>
+          
+            <div class="card-body border-top">
+
+                <form method="post" action="{% url 'updateFrais' f.codeFrais %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="validationCustom01">CODE FRAIS</label>
+                        <input type="text" class="form-control"  value="{{f.codeFrais}}" name="codefrais" id="validationCustom01" placeholder="CODE FRAIS"  required>
+                    </div>
+                    <div class="form-group">
+                        <label for="validationCustom01">LIBELLE FRAIS</label>
+                        <input type="text" name="libfrais" value="{{f.libelle}}"  class="form-control" id="validationCustom01" placeholder="LIBELLE FRAIS"  required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" style="width: 20%;color:white;">Enregistrer modication</button>
+                    
+                </form>
+                <br>
+                <a type="submit" href="{% url 'ffrais' %}" class="btn btn-primary btn-lg btn-block" style="width: 20%;color:white;">Retour</a>
+                
+
+                <div class="aside-compose"><a class="btn btn-lg btn-secondary btn-block" style="color: white;">{{message}}</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>      
+{% endblock content %}  
+    
+

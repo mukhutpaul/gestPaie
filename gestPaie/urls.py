@@ -29,7 +29,20 @@ urlpatterns = [
     
     path('ajouterFrais/',ajouterFrais,name="ajouterFrais"),
     path('addfrais/',addfrais,name="addfrais"),
+    
+    path('rapportFrais/',rapportFrais,name="rapportFrais"),
+    
+    
+    
+    
    
    
     path('deletepaiement/<str:id>/',deletepaiement, name="deletepaiement"),
+    
+    path('modifierFrais/<str:id>/',modifierFrais, name="modifierFrais"),
+    
+    path('updateFrais/<str:id>/',updateFrais, name="updateFrais"),
+    
+    
+    
 ]

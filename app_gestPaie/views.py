@@ -1,8 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from app_gestPaie.models.frais import Frais
 from app_gestPaie.models.paiement import paiment
 from django.shortcuts import redirect
+from datetime import datetime
+from xhtml2pdf import pisa
 
 # Create your views here.
 
@@ -76,3 +78,55 @@ def addfrais(request):
         'message':message
     }
     return render(request,'AjouterFrais.html',ctx)
+
+def modifierFrais(request,id):
+      f = Frais.objects.get(pk=id)
+      
+      ctx= {
+          'f':f
+      }
+      return render(request,'modifierFrais.html',ctx)
+  
+  
+def updateFrais(request,id):
+      f = Frais.objects.get(pk = id)
+      lib = request.POST["libfrais"]
+              
+      f.libelle  = lib
+      
+      #print(f.intfrais,f.montant,f.codefrais)
+      f.save()
+      return HttpResponseRedirect('/frais/')
+  
+
+def rapportFrais(request):
+    template_path = 'rapport/rapportFrais.html'
+   
+    fs = Frais.objects.all()
+    #pf = paiement.objects.all().group_by('eleve')
+    #pf = paiement.objects.aggregate(Sum('montant'))
+ 
+
+    ctx ={
+        'fr': fs ,
+        'compte' : len(fs),
+        'date' : datetime.now(),
+    }
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+
+    template = get_template(template_path)
+    html = template.render(ctx)
+	
+    import sys
+    sys.setrecursionlimit(2500)
+
+    pisa_status = pisa.CreatePDF(
+        html, dest=response
+    )
+
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>'+ html +'</pre>')
+    
+    return response
