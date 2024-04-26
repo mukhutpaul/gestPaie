@@ -15,34 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from app_gestPaie.views import *
 
+
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
-    #path('',index,name="index"),
+    path("paie/",include("app_gestPaie.urls")),
+    path('',index,name="index"),
     path('frais/',ffrais,name="ffrais"),
     path('',dash,name="dash"),
     
     path('deleteFrais/<str:id>/',deleteFrais, name="deleteFrais"),
     path('paiement/',ppaiement,name="ppaiement"),
-    
     path('ajouterFrais/',ajouterFrais,name="ajouterFrais"),
     path('addfrais/',addfrais,name="addfrais"),
-    
     path('rapportFrais/',rapportFrais,name="rapportFrais"),
-    
-    
-    
-    
-   
-   
     path('deletepaiement/<str:id>/',deletepaiement, name="deletepaiement"),
-    
     path('modifierFrais/<str:id>/',modifierFrais, name="modifierFrais"),
-    
     path('updateFrais/<str:id>/',updateFrais, name="updateFrais"),
     
-    
-    
+       
 ]

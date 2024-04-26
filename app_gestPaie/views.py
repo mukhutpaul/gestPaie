@@ -7,6 +7,14 @@ from datetime import datetime
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 
+#importation api
+
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+from app_gestPaie.serializer import FraisSerialiser
+
+
 # Create your views here.
 
 def index(request):
@@ -131,3 +139,75 @@ def rapportFrais(request):
         return HttpResponse('We had some errors <pre>'+ html +'</pre>')
     
     return response
+
+
+## CRéation des APIS pour le modele frais
+
+class FraisDetails(APIView):
+    def get(self,request):
+        obj = Frais.objects.all()
+        serializer = FraisSerialiser(obj,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    def post(self,request):
+        serializer = FraisSerialiser(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status = status.HTTP_201_CREATED)
+
+class FraisInfo(APIView):
+    
+    def get(self,request,id):
+        try:
+            obj = Frais.objects.get(pk=id)
+        except:
+            msg={"msg":"not found"}
+            return Response(msg, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = FraisSerialiser(obj)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    def put(self,request,id):
+        try:
+            obj = Frais.objects.get(pk=id)
+            
+        except Frais.DoesNotExist:
+            msg={"msg":"not found error"}
+            
+            return Response(msg, status = status.HTTP_404_NOT_FOUND)
+        
+        serializer = FraisSerialiser(obj,data = request.data)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_205_RESET_CONTENT)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+    def patch(self,request,id):
+        try:
+            obj = Frais.objects.get(pk=id)
+            
+        except Frais.DoesNotExist:
+            msg={"msg":"not found error"}
+            
+            return Response(msg, status = status.HTTP_404_NOT_FOUND)
+        
+        serializer = FraisSerialiser(obj,data = request.data,partial=True)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_205_RESET_CONTENT)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self,request,id):
+        try:
+            obj = Frais.objects.get(pk=id)
+        
+        except Frais.DoesNotExist:
+            msg = {"msg":"not found"}
+            
+            return Response(msg, status = status.HTTP_404_NOT_FOUND)
+        
+        obj.delete()
+        return Response({"msg":"deleted"},status=status.HTTP_204_NO_CONTENT)
+
